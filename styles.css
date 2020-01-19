@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#page-wrapper{
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    font-family: 'Montserrat', 'Arial', sans-serif;
+}
+
+/* header styling */
+
+#header-section {
+    display: flex;
+    background: rgb(158, 218, 158); 
+    height: 4rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* form styling */
+
+#form-section {
+    height: 10%;
+}
+
+/* card section styling */
+
+#library-section {
+    display: grid;
+    padding-left: 3rem;;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    height: 80%;
+}
+
+.card {
+    display: flex;
+    padding-left: 4rem;
+    padding-top: 1.5rem;
+    margin: 1.5rem;
+    height: 10rem;
+    flex-direction: column;
+    align-items: flex-start;
+    border: solid 2px black;
+}
+
+
+
+.invisible{
+   opacity: 0;
+}
+

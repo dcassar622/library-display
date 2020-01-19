@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300|Work+Sans:300" rel="stylesheet">
+</head>
+<body>
+    <div id='page-wrapper'>
+        <div id='header-section'>
+            <h1>Welcome To The Library</h1>
+        </div>
+        <div id='form-section'>
+            <button id='add-btn'>Add Book</button>
+            <div id='visible-form'  class='invisible'>
+                <form id='new-book-form'>
+                    Title: <input type='text' id='form-title'>
+                    Author: <input type='text' id='form-author'>
+                    Year: <input type='number' id='form-year'>
+                    Pages: <input type='number' id='form-pages'>
+                    Read: <select name='read' id='form-read'>
+                            <option value='yes'>Yes</option>
+                            <option value='no'>No</option>
+                        </select>
+                </form>
+                <button id='submit-btn'>Submit</button>
+            </div>
+        </div>
+        <div id='library-section'></div>
+    </div>
+    <script src='main.js'></script>
+</body>
+</html>
