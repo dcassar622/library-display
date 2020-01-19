@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+/* page styling */
+
+button {
+    padding: 10px;
+    border-radius: 7px;
+    width: 80px;
+}
+
 #page-wrapper{
     width: 100vw;
     height: 100vh;
@@ -15,7 +23,8 @@
 
 #header-section {
     display: flex;
-    background: rgb(158, 218, 158); 
+    background: rgb(139, 209, 149); 
+    color: white;
     height: 4rem;
     justify-content: center;
     align-items: center;
@@ -27,6 +36,10 @@
     height: 10%;
 }
 
+.invisible{
+    visibility: hidden;
+ }
+
 /* card section styling */
 
 #library-section {
@@ -34,23 +47,67 @@
     padding-left: 3rem;;
     justify-content: center;
     grid-template-columns: repeat(3, 1fr);
+    width: 100%;
     height: 80%;
 }
 
 .card {
     display: flex;
-    padding-left: 4rem;
-    padding-top: 1.5rem;
-    margin: 1.5rem;
-    height: 10rem;
+    min-width: 19rem;
+    min-height: 18rem;
+    max-width: 25rem;
+    max-height: 20rem;
+    padding: 1rem 2rem 2rem 1rem;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     border: solid 2px black;
+    border-radius: 10px;
+    background: rgb(255, 179, 144);
+    font-size: 1.2rem;
 }
 
-
-
-.invisible{
-   opacity: 0;
+#title {
+    font-weight: 900;
 }
+
+#author {
+    font-weight: 200;
+}
+
+#year {
+    margin-top: 14px; 
+    font-weight: light;
+    font-style: italic;
+}
+
+#read {
+    color: rgb(245, 245, 245); 
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 15px; 
+}
+
+.remove-btn {
+    margin-top: 30px;
+    background: rgb(0, 0, 0);
+    color: white;
+} 
+
+.toggle-read-btn {
+    margin-top: 5px;
+} 
+
+/* Responsive Design */
+
+@media only screen and (max-width: 400px) {
+    
+    #library-section {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+  }
+
+
+
 

@@ -29,7 +29,7 @@ class Book {
 
 setDefaultBooks();
 setupForm();
-render();
+renderDisplay();
 
 //creates initial default 'placeholder' books
 function setDefaultBooks() {
@@ -52,7 +52,7 @@ function setupForm() {
 }
 
 //gets all the books in the database and displays them on screen
-function render() {
+function renderDisplay() {
 
     bookDisplayId = 0;
 
@@ -75,17 +75,17 @@ function render() {
 
         let bookAuthor = document.createElement('p');
         newBook.appendChild(bookAuthor);
-        bookAuthor.append(book.author);
+        bookAuthor.append(`by ${book.author}`);
         bookAuthor.id = 'author';
 
         let bookYear = document.createElement('p');
         newBook.appendChild(bookYear);
-        bookYear.append(book.year);
+        bookYear.append(`published in ${book.year}`);
         bookYear.id = 'year';
 
         let bookPages = document.createElement('p');
         newBook.appendChild(bookPages);
-        bookPages.append(book.pages);
+        bookPages.append(`${book.pages} pages`);
         bookPages.id = 'pages';
 
         let bookRead = document.createElement('p');
@@ -93,21 +93,28 @@ function render() {
         bookRead.append(read);
         bookRead.id = 'read';
 
+        //create and setup toggle button for each book's 'read' status
+        let toggleReadBtn = document.createElement('button');
+        toggleReadBtn.innerHTML = `Toggle`;
+        toggleReadBtn.className = 'toggle-read-btn';
+        toggleReadBtn.addEventListener('click', (e) => {
+            toggleReadStatus(e.target.parentNode.id);
+        });
+        newBook.appendChild(toggleReadBtn);
+
+        //create and setup delete(remove) button for each book
         let delBtn = document.createElement('button');
         delBtn.innerHTML = 'Remove';
-        delBtn.class = 'remove-btn';
+        delBtn.className = 'remove-btn';
+        delBtn.addEventListener('click', (e) => {
+            deleteBook(e.target.parentNode.id);
+        });
         newBook.appendChild(delBtn);
 
         librarySection.appendChild(newBook);
 
-        delBtn.addEventListener('click', (e) => {
-            deleteBook(e.target.parentNode.id);
-        });
-
         bookDisplayId++;
     });
-    console.log(`Array ID : ${bookArrayId}`);
-        console.log(`Display ID : ${bookDisplayId}`)
 }
 
 //shows the form to add new book when 'add' button is clicked
@@ -127,7 +134,7 @@ function submitForm() {
     let book = new Book(title, author, year, pages, read);
     book.addToLibrary();
     clearDisplay(); 
-    render();
+    renderDisplay();
     newBookForm.className = 'invisible';
 }
 
@@ -143,5 +150,19 @@ function deleteBook(bookId) {
     bookArrayId = 0; 
     bookDisplayId = 0;
     clearDisplay();
-    render();
+    renderDisplay();
+}
+
+
+function toggleReadStatus(bookId) {
+    if (library[bookId].read === 'yes')
+    {
+        library[bookId].read = 'no';
+    }
+    else if (library[bookId].read === 'no')
+    {
+        library[bookId].read = 'yes';
+    }
+    clearDisplay();
+    renderDisplay();
 }
