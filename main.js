@@ -1,4 +1,22 @@
-/* initialise library database (array), ID variables and
+// Setup Firebase
+var firebaseConfig = {
+    apiKey: "AIzaSyA5FK07mvrEvQqMP9JeEylYQlO0t4Gq7h0",
+    authDomain: "library-display.firebaseapp.com",
+    databaseURL: "https://library-display.firebaseio.com",
+    projectId: "library-display",
+    storageBucket: "library-display.appspot.com",
+    messagingSenderId: "471385881442",
+    appId: "1:471385881442:web:4d7f3c251684e48ddf0a3b"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+
+  // Create database in firebase
+ let bookCollection = firebase.database().ref('books');
+
+
+/* Initialise library database (array), ID variables and
   define library and form divs */
 let library = [];
 let bookArrayId = 0; 
@@ -6,8 +24,9 @@ let bookDisplayId = 0;
 
 let librarySection = document.getElementById('library-section');
 const newBookForm = document.getElementById('visible-form');
+const addBtn = document.getElementById('add-btn');
 
-/*creates a new book, and defines method 
+/* Creates a new book, and defines method 
 for adding it to library database (array) */ 
 class Book {
     constructor (title, author, year, pages, read) {
@@ -21,7 +40,7 @@ class Book {
     addToLibrary() {
         this.id = bookArrayId;
         library.push(this);
-        
+        //saveBookToDatabase(this.title, this.author, this.year, this.pages, this.read);
         bookArrayId++;
     }       
 }
@@ -31,7 +50,7 @@ setDefaultBooks();
 setupForm();
 renderDisplay();
 
-//creates initial default 'placeholder' books
+// Creates initial default 'placeholder' books
 function setDefaultBooks() {
     let book1 = new Book('Harry Potter', 'JK Rowling', 1990, 270, 'yes');
     let book2 = new Book('Lord Of The Rings', 'JR Tolkien', 1926, 460, 'no');
@@ -42,16 +61,16 @@ function setDefaultBooks() {
     book3.addToLibrary();
 }
 
-//creates form to add new books
+// Creates form to add new books
 function setupForm() {
-    const addBtn = document.getElementById('add-btn');
+    
     addBtn.addEventListener('click', showForm);
     
     let submitBtn = document.getElementById('submit-btn');
     submitBtn.addEventListener('click', submitForm);
 }
 
-//gets all the books in the database and displays them on screen
+// Gets all the books in the database and displays them on screen
 function renderDisplay() {
 
     bookDisplayId = 0;
@@ -117,12 +136,13 @@ function renderDisplay() {
     });
 }
 
-//shows the form to add new book when 'add' button is clicked
+// Shows the form to add new book when 'add' button is clicked
 function showForm() {
    newBookForm.className = 'visible';
+   addBtn.className = 'invisible';
 }
 
-//submits new book to the database and displays it
+// Submits new book to the database and displays it
 function submitForm() {
     title = document.getElementById('form-title').value;
     author = document.getElementById('form-author').value;
@@ -136,15 +156,16 @@ function submitForm() {
     clearDisplay(); 
     renderDisplay();
     newBookForm.className = 'invisible';
+    addBtn.className = 'visible';
 }
 
-//clears the library display area and repopulates it with the updated database
+// Clears the library display area and repopulates it with the updated database
 function clearDisplay() {
     let librarySection = document.getElementById('library-section');
     librarySection.innerHTML='';
 }
 
-//deletes book from the library database
+// Deletes book from the library database
 function deleteBook(bookId) {
     library.splice(bookId, 1);
     bookArrayId = 0; 
@@ -165,4 +186,15 @@ function toggleReadStatus(bookId) {
     }
     clearDisplay();
     renderDisplay();
+}
+
+function saveBookToDatabase (title, author, year, pages, read) {
+    let newBookRef = bookCollection.push();
+    newBookRef.set( {
+        title: title,
+        author: author,
+        year: year,
+        pages: pages,
+        read: read
+    })
 }
