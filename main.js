@@ -140,6 +140,7 @@ function renderDisplay() {
 function showForm() {
    newBookForm.className = 'visible';
    addBtn.className = 'invisible';
+   librarySection.className = 'darkened';
 }
 
 // Submits new book to the database and displays it
